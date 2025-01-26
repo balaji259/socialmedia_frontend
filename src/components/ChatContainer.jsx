@@ -8,7 +8,8 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 const backendBaseUrl="http://localhost:7000";
 
-const renderurl="https://socialmedia-backend-2njs.onrender.com"
+// const vercelurl="https://socialmedia-backend-2njs.onrender.com"
+const vercelurl="https://friendsbookweb.up.railway.app"
 
 const  ChatContainer=() =>{
     const {messages,getMessages,isMessagesLoading,selectedUser,subscribeToMessages,unsubscribeFromMessages}=useChatStore();
@@ -41,7 +42,7 @@ const  ChatContainer=() =>{
     const getUserId=async() =>{
         try{
             const token=localStorage.getItem("token");
-            const res=await axios.get(`/user/userId`,{
+            const res=await axios.get(`${vercelurl}/user/userId`,{
             
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -59,7 +60,7 @@ const  ChatContainer=() =>{
     const getUserData= async () =>{
         try{
             const token=localStorage.getItem("token");
-            const res=await axios.get(`/user/getdetails`,{
+            const res=await axios.get(`${vercelurl}/user/getdetails`,{
                 headers: {
                     Authorization:`Bearer ${token}`,
                 },

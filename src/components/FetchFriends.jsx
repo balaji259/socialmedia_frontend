@@ -7,7 +7,8 @@ const FriendsList = () => {
   const [friends, setFriends] = useState([]);
   const [userId, setUserId] = useState(null); // Initialize with `null` to avoid premature API calls
   const backendBaseUrl = "http://localhost:7000";
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
   const navigate=useNavigate();
   const {onlineUsers} =useSocket();
   const getUserIdFromToken = () => {
@@ -35,7 +36,7 @@ const FriendsList = () => {
     const fetchFriends = async () => {
       try {
         console.log("Fetching friends for userId:", userId);
-        const response = await axios.get(`/user/${userId}/friends`);
+        const response = await axios.get(`${vercelurl}/user/${userId}/friends`);
         
         setFriends(response.data.friends);
       

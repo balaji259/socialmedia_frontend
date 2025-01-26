@@ -7,7 +7,8 @@ const SuggestionsSidebar = () => {
   const [streakCount, setStreakCount] = useState(0);
   const [topStreakUsers, setTopStreakUsers] = useState([]);
   const backendBaseUrl='http://localhost:7000';
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
   
 
   const navigate=useNavigate();
@@ -33,7 +34,7 @@ const SuggestionsSidebar = () => {
           const token = localStorage.getItem('token');
           
           await axios.post(
-              `/user/search/followsug`,
+              `${vercelurl}/user/search/followsug`,
               { userId: currentUserId, followId },
               { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -54,7 +55,7 @@ const SuggestionsSidebar = () => {
         return;
       }
 
-      const response = await fetch(`/profile/me`, {
+      const response = await fetch(`${vercelurl}/profile/me`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -76,7 +77,7 @@ const SuggestionsSidebar = () => {
   const fetchUserSuggestions = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/user/suggestions`, {
+      const response = await fetch(`${vercelurl}/user/suggestions`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -106,7 +107,7 @@ const SuggestionsSidebar = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`/streak/top-streaks`)
+    axios.get(`${vercelurl}/streak/top-streaks`)
       .then(response => {
         console.log(response);
         setTopStreakUsers(response.data);

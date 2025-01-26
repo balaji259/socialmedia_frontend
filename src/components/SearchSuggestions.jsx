@@ -9,7 +9,8 @@ const SearchSuggestions = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const backendBaseUrl = "http://localhost:7000";
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
   const navigate=useNavigate();
 
   const {onlineUsers} =useSocket();
@@ -33,7 +34,7 @@ const SearchSuggestions = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`/user/search/suggestions`, {
+      const response = await axios.get(`${vercelurl}/user/search/suggestions`, {
         params: { query, page },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -63,7 +64,7 @@ const SearchSuggestions = () => {
       console.log(currentUserId,userId);
       const token = localStorage.getItem("token");
       await axios.post(
-        `/user/search/${action}`,
+        `${vercelurl}/user/search/${action}`,
         { userId: currentUserId, targetId: userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

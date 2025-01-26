@@ -11,7 +11,8 @@ const Search = () => {
   const [currentuser, setCurrentUser] = useState({ username: "", profilePic: "" });
   const {user,setUser,socket,connectSocket}= useSocket();
   const backendBaseUrl="http://localhost:7000"; 
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
 
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const Search = () => {
   async function getUser(){
     try{
         const token=localStorage.getItem("token");
-        const res=await axios.get(`/user/getUser`,{
+        const res=await axios.get(`${vercelurl}/user/getUser`,{
             headers: {
                 Authorization:`Bearer ${token}`,
             },

@@ -13,7 +13,8 @@ const Home = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false); // Default to `false` for smaller screens
   const {user,setUser,socket,connectSocket}= useSocket();
   const backendBaseUrl="http://localhost:7000"; 
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
   // Determine sidebar visibility based on screen width
   useEffect(() => {
     const handleResize = () => {
@@ -52,7 +53,7 @@ const Home = () => {
   async function getUser(){
     try{
         const token=localStorage.getItem("token");
-        const res=await axios.get(`/user/getUser`,{
+        const res=await axios.get(`${vercelurl}/user/getUser`,{
             headers: {
                 Authorization:`Bearer ${token}`,
             },

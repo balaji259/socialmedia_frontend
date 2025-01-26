@@ -1,4 +1,5 @@
-const renderurl="https://socialmedia-backend-2njs.onrender.com";
+// const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+const vercelurl="https://friendsbookweb.up.railway.app";
 async function fetchUserDetails(token) {
     // Check if token is available
     if (!token) {
@@ -7,7 +8,7 @@ async function fetchUserDetails(token) {
     }
   
     try {
-      const response = await fetch(`/user/getdetails`, {
+      const response = await fetch(`${vercelurl}/user/getdetails`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`, // Send token in Authorization header

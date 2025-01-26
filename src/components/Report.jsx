@@ -7,7 +7,8 @@ const ReportPost = () => {
     const [postId, setPostId] = useState("");
     const [reason, setReason] = useState("");
     const backendBaseUrl = 'http://localhost:7000';
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const ReportPost = () => {
         console.log(reportData);
 
         try {
-            const response = await fetch(`/posts/report`, {
+            const response = await fetch(`${vercelurl}/posts/report`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

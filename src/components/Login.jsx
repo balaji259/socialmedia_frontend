@@ -13,7 +13,8 @@ const Login = ({ onSwitch }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
 
     
     const {user, setUser ,socket, connectSocket}= useSocket();
@@ -22,7 +23,7 @@ const Login = ({ onSwitch }) => {
          
             e.preventDefault();
            
-        axios.post(`/user/login`, { email, password })
+        axios.post(`${vercelurl}/user/login`, { email, password })
             .then((response) => {
                 const token = response.data.token;
                 localStorage.setItem('token', token);
@@ -54,7 +55,7 @@ const Login = ({ onSwitch }) => {
     const handleGoogleLogin = async (x) => {
         
             console.log(x.email);
-            axios.post(`/user/login`, { email: x.email })
+            axios.post(`${vercelurl}/user/login`, { email: x.email })
                 .then((response) => {
                     const token = response.data.token;
                     localStorage.setItem('token', token);

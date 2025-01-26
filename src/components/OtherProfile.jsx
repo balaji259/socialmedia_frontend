@@ -22,7 +22,8 @@ const Profile = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [loading, setLoading] = useState(false); // For button loading state
     const {onlineUsers} =useSocket();   
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
 
     const navigate=useNavigate();
     const backendBaseUrl="http://localhost:7000";
@@ -72,7 +73,7 @@ const Profile = () => {
 
       useEffect(() => {
         // Fetch user data by userId
-        axios.get(`${renderurl}/user/viewProfile/${userId}`)
+        axios.get(`${vercelurl}/user/viewProfile/${userId}`)
             .then((response) => {
               console.log("userdata");
               console.log(response.data);
@@ -86,7 +87,7 @@ const Profile = () => {
 
  const checkConnection = async () => {
     try {
-      const response = await axios.get(`/profile/check-connection/${currentUserId}/${userId}`);
+      const response = await axios.get(`${vercelurl}/profile/check-connection/${currentUserId}/${userId}`);
       setConnectionStatus(response.data);
     } catch (error) {
       console.error('Error checking connection:', error);
@@ -99,7 +100,7 @@ const Profile = () => {
 const fetchMutualFriends = async () => {
   try {
     if (userId && currentUserId) {
-      const response = await axios.get(`/profile/mutual-friends/${currentUserId}/${userId}`);
+      const response = await axios.get(`${vercelurl}/profile/mutual-friends/${currentUserId}/${userId}`);
       setMutualFriendsCount(response.data.mutualFriendsCount);
     }
   } catch (error) {
@@ -111,7 +112,7 @@ const fetchMutualFriends = async () => {
 async function getFriendsDetails(userId) {
     try {
       console.log("before");
-      const response = await fetch(`/profile/getfriends/${userId}`);
+      const response = await fetch(`${vercelurl}/profile/getfriends/${userId}`);
       console.log("after");
       console.log(response);
       if (!response.ok) {
@@ -145,7 +146,7 @@ async function getFriendsDetails(userId) {
    const fetchFollowStatus = async () => {
     try {
       const response = await axios.get(
-        `/profile/isFollowing/${userId}/${currentUserId}`);
+        `${vercelurl}/profile/isFollowing/${userId}/${currentUserId}`);
       
       console.log("follow status");
       console.log(response.data.isFollowing);
@@ -163,10 +164,10 @@ async function getFriendsDetails(userId) {
             // Unfollow API call
             console.log('calling unfollow route');
             await axios.post(
-              `/profile/unfollow/${userId}/${currentUserId}`);
+              `${vercelurl}/profile/unfollow/${userId}/${currentUserId}`);
           } else {
             // Follow API call
-            await axios.post(`/profile/follow/${userId}/${currentUserId}`);
+            await axios.post(`${vercelurl}/profile/follow/${userId}/${currentUserId}`);
           }
           setIsFollowing(!isFollowing); // Toggle follow status locally
         } catch (error) {

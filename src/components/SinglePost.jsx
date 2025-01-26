@@ -11,11 +11,12 @@ const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [showMenus, setShowMenus] = useState({});
   const { postId } = useParams();
+  const vercelurl="https://friendsbookweb.up.railway.app";
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/posts/render-single/${postId}`);
+        const response = await axios.get(`${vercelurl}/posts/render-single/${postId}`);
         setPost(response.data);
       } catch (error) {
         console.error("Error fetching post:", error);

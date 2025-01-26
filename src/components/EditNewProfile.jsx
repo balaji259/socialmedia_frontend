@@ -11,7 +11,8 @@ const NewProfile = () => {
     const [userData, setUserData] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const backendBaseUrl="http://localhost:7000";
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
 
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -24,7 +25,7 @@ const NewProfile = () => {
       if (value.length > 0) {
         // Fetch suggestions from the backend
         try {
-          const response = await fetch(`/profile/search-bestfriend?query=${value}`);
+          const response = await fetch(`${vercelurl}/profile/search-bestfriend?query=${value}`);
           const data = await response.json();
           setSuggestions(data.users); // Assuming the backend returns { users: [{ id, name }] }
           console.log("data of best freinds");
@@ -118,7 +119,7 @@ const NewProfile = () => {
       }
     
         try {
-            const response = await axios.patch(`/profile/demo/update`, formData, {
+            const response = await axios.patch(`${vercelurl}/profile/demo/update`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`, // Pass token for authentication

@@ -8,7 +8,8 @@ import axios from "axios";
 const WelcomeOverlay = () => {
     const navigate = useNavigate();
     const { user, setUser, socket, connectSocket } = useSocket();
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
     function onRegister() {
         navigate(`/register`);
     }
@@ -20,7 +21,7 @@ const WelcomeOverlay = () => {
   const checkUser=async ()=>{
     const token=localStorage.getItem("token");
     if(token){
-        axios.get(`/verify`,{
+        axios.get(`${vercelurl}/verify`,{
             headers: {Authorization:`Bearer ${token}` },
         })
         .then((res)=> {

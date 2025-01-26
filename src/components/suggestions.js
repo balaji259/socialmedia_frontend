@@ -1,9 +1,10 @@
-const renderurl="https://socialmedia-backend-2njs.onrender.com";
+// const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+const vercelurl="https://friendsbookweb.up.railway.app";
 async function fetchUserSuggestions() {
     try {
         const token = localStorage.getItem('token');
         
-        const response = await fetch(`/user/suggestions`, {
+        const response = await fetch(`${vercelurl}/user/suggestions`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

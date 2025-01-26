@@ -15,7 +15,8 @@ const UserProfile = () => {
     const [likedData,setLikedData]=useState([]);
     const [activeSection, setActiveSection] = useState('posts');
     const backendBaseUrl = "http://localhost:7000";
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app"
     const navigate=useNavigate();
 
     const handleSectionChange = (section) => {
@@ -31,7 +32,7 @@ const UserProfile = () => {
             console.log(userId);
     
             if (userData) {
-                const response = await axios.get(`/profile/userPosts/${userId}`);
+                const response = await axios.get(`${vercelurl}/profile/userPosts/${userId}`);
                 
     
                 
@@ -54,7 +55,7 @@ const UserProfile = () => {
             const userId=userData._id;
             console.log(userId);
 
-            const response = await axios.get(`/profile/likedPosts/${userId}`);
+            const response = await axios.get(`${vercelurl}/profile/likedPosts/${userId}`);
            
             setLikedData(response.data);
         } catch (error) {
@@ -71,7 +72,7 @@ const UserProfile = () => {
             console.log(userId);
     
             if (userData) {
-                const response = await axios.get(`/profile/savedPosts/${userId}`);
+                const response = await axios.get(`${vercelurl}/profile/savedPosts/${userId}`);
                 
                
                 
@@ -91,7 +92,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         // Fetch user data by userId
-        axios.get(`/user/viewProfile/${userId}`)
+        axios.get(`${vercelurl}/user/viewProfile/${userId}`)
             .then((response) => {
                 setUserData(response.data);
             })
@@ -114,7 +115,7 @@ const UserProfile = () => {
     
         try {
             // Fetch user details from the backend
-            const response = await fetch(`/user/getUsersByIds`, {
+            const response = await fetch(`${vercelurl}/user/getUsersByIds`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userIds }),

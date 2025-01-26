@@ -294,13 +294,14 @@ const PostComponent = () => {
   const backendBaseUrl = 'http://localhost:7000';
   const frontendBaseUrl='http://localhost:3000';
   const baseUrl="https://friendsbook-cy0f.onrender.com";
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
 
 
   const fetchPosts = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`/posts/get`, {
+      const response = await fetch(`${vercelurl}/posts/get`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (!response.ok) {
@@ -431,7 +432,7 @@ const PostComponent = () => {
   
       // Backend call
       console.log("Sending FormData to backend...");
-      const response = await fetch(`${renderurl}/posts/create`, {
+      const response = await fetch(`${vercelurl}/posts/create`, {
         method: "POST",
         body: formData,
         headers: {
@@ -485,7 +486,7 @@ const PostComponent = () => {
     const { userId } = JSON.parse(jsonPayload);
   
     try {
-      const response = await fetch(`/posts/like/${userId}/${postId}`, {
+      const response = await fetch(`${vercelurl}/posts/like/${userId}/${postId}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -570,7 +571,7 @@ const userId = payload.userId;
 
   console.log(saveData);
 
-  fetch(`/posts/save`, {
+  fetch(`${vercelurl}/posts/save`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -604,7 +605,7 @@ const deletePost = async (postId) => {
   try {
     console.log("delete called");
     const token=localStorage.getItem('token');
-    const response = await fetch(`/posts/${postId}`, {
+    const response = await fetch(`${vercelurl}/posts/${postId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`, // Replace with your actual token
@@ -638,7 +639,7 @@ const deletePost = async (postId) => {
   }
 
   try {
-    const response = await fetch(`/posts/comment/${postId}`, {
+    const response = await fetch(`${vercelurl}/posts/comment/${postId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -668,7 +669,7 @@ const handleAddReply = async (replyId) => {
   }
 
   try {
-    const response = await fetch(`/posts/comment/reply/${replyId}`, {
+    const response = await fetch(`${vercelurl}/posts/comment/reply/${replyId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

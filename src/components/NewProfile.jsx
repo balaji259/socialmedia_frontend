@@ -31,7 +31,8 @@ const Profile = () => {
 
     const token=localStorage.getItem('token');
     const backendBaseUrl = 'http://localhost:7000';
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
 
 
 
@@ -47,7 +48,7 @@ const Profile = () => {
               return;
           }
 
-          const response = await fetch(`/profile/me`, {
+          const response = await fetch(`${vercelurl}/profile/me`, {
               method: 'GET',
               headers: {
                   'Authorization': `Bearer ${token}`,
@@ -77,7 +78,7 @@ const Profile = () => {
   async function getFriendsDetails(userId) {
     try {
       console.log("before");
-      const response = await fetch(`/profile/getfriends/${userId}`);
+      const response = await fetch(`${vercelurl}/profile/getfriends/${userId}`);
       console.log("after");
       console.log(response);
       if (!response.ok) {

@@ -10,7 +10,8 @@ import {useSocket} from "./useSocket";
 const Dashboard = () => {
   const navigate = useNavigate();
   const websitelink="https://friendsbook-cy0f.onrender.com";
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app"
   const {user, setUser ,socket, connectSocket,disconnectSocket} =useSocket();
 
 
@@ -32,7 +33,7 @@ const Dashboard = () => {
   };
 
   function inviteFriends(){
-    navigator.clipboard.writeText(`${renderurl}`)
+    navigator.clipboard.writeText(`${vercelurl}`)
     .then(() => toast.success("website link copied! Share it to your friends."))
     .catch(err => console.error('Failed to copy:', err));
   }

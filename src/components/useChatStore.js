@@ -5,7 +5,8 @@ import axios from "axios";
 import {useSocket} from "./useSocket";
 // import {axiosInstance} from "../lib/axios";
 const backendBaseUrl = "http://localhost:7000";
-const renderurl="https://socialmedia-backend-2njs.onrender.com";
+// const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+const vercelurl="https://friendsbookweb.up.railway.app";
 
 
 
@@ -26,7 +27,7 @@ export const useChatStore = create((set,get)=>({
         try{
           
             const token=localStorage.getItem('token');
-            const res=await axios.get(`/messages/getusers`,{
+            const res=await axios.get(`${vercelurl}/messages/getusers`,{
             
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -50,7 +51,7 @@ export const useChatStore = create((set,get)=>({
         set({isMessagesLoading: true});
         try{
             const token=localStorage.getItem('token');
-            const res=await axios.get(`/messages/get/${userId}`,{
+            const res=await axios.get(`${vercelurl}/messages/get/${userId}`,{
                 headers:{
                     Authorization:`Bearer ${token}`
                 }
@@ -77,7 +78,7 @@ export const useChatStore = create((set,get)=>({
             console.log("checking msg at star5t");
             console.log(messages);
             const token=localStorage.getItem('token');
-            const res=await axios.post(`/messages/send/${selectedUser._id}`,messageData,{
+            const res=await axios.post(`${vercelurl}/messages/send/${selectedUser._id}`,messageData,{
             
                 headers: {
                   Authorization: `Bearer ${token}`,

@@ -31,7 +31,8 @@ function UserDetails() {
 
     const token=localStorage.getItem('token');
     const backendBaseUrl = 'http://localhost:7000';
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app"
  
 
     const openModal = async (type) => {
@@ -44,7 +45,7 @@ function UserDetails() {
   
       try {
           // Fetch user details from backend
-          const response = await fetch(`/user/getUsersByIds`, {
+          const response = await fetch(`${vercelurl}/user/getUsersByIds`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ userIds }),
@@ -104,7 +105,7 @@ function UserDetails() {
     const handleUnsavePost = async (postId) => {
         try {
             console.log("handledeletepost fucntion");
-          const response = await fetch(`/profile/deleteSavedPost/${postId}`, {
+          const response = await fetch(`${vercelurl}/profile/deleteSavedPost/${postId}`, {
             method: "DELETE",
           });
           if (response.ok) {
@@ -131,7 +132,7 @@ function UserDetails() {
                 return;
             }
 
-            const response = await fetch(`/profile/me`, {
+            const response = await fetch(`${vercelurl}/profile/me`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -173,7 +174,7 @@ function UserDetails() {
     const fetchSuggestions = async (query) => {
         if (query.length >= 2) {
             try {
-                const response = await fetch(`/profile/bestfriend/search?username=${query}`);
+                const response = await fetch(`${vercelurl}/profile/bestfriend/search?username=${query}`);
                 const data = await response.json();
                 setSuggestions(data.length ? data : []); // Clear suggestions if no data
             } catch (error) {
@@ -249,7 +250,7 @@ function UserDetails() {
     }
   
       try {
-          const response = await axios.patch(`/profile/update`, formData, {
+          const response = await axios.patch(`${vercelurl}/profile/update`, formData, {
               headers: {
                   'Content-Type': 'multipart/form-data',
                   Authorization: `Bearer ${localStorage.getItem('token')}`, // Pass token for authentication
@@ -271,7 +272,7 @@ function UserDetails() {
             console.log(userId);
     
             if (userData) {
-                const response = await axios.get(`/profile/userPosts/${userId}`);
+                const response = await axios.get(`${vercelurl}/profile/userPosts/${userId}`);
                 
     
 
@@ -299,7 +300,7 @@ function UserDetails() {
             const userId=userData._id;
             console.log(userId);
 
-            const response = await axios.get(`/profile/likedPosts/${userId}`);
+            const response = await axios.get(`${vercelurl}/profile/likedPosts/${userId}`);
            
             setLikedData(response.data);
         } catch (error) {
@@ -311,7 +312,7 @@ function UserDetails() {
 
     async function unlikePost(postId) {
       try {
-        const response = await fetch(`/posts/${postId}/unlike`, {
+        const response = await fetch(`${vercelurl}/posts/${postId}/unlike`, {
           method: 'PATCH',
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -338,7 +339,7 @@ function UserDetails() {
         try {
           
           const token=localStorage.getItem('token');
-          const response = await fetch(`/posts/${postId}`, {
+          const response = await fetch(`${vercelurl}/posts/${postId}`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}`, 
@@ -367,7 +368,7 @@ function UserDetails() {
             const userId = userData._id;
            
             if (userData) {
-                const response = await axios.get(`/profile/savedPosts/${userId}`);
+                const response = await axios.get(`${vercelurl}/profile/savedPosts/${userId}`);
                 
               
                 

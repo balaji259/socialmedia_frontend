@@ -12,7 +12,8 @@ const App = () => {
 
 
   const backendBaseUrl = 'http://localhost:7000';
-  const renderurl="https://socialmedia-backend-2njs.onrender.com";
+  // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+  const vercelurl="https://friendsbookweb.up.railway.app";
   const buttonRef=useRef(null);
   
   useEffect(() => {
@@ -37,7 +38,7 @@ const App = () => {
 
         console.log("i n fetching userposts");
 
-        const response = await fetch(`/profile/me`, {
+        const response = await fetch(`${vercelurl}/profile/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -84,7 +85,7 @@ useEffect(() => {
         console.log(userId);
 
         if (userData) {
-            const response = await axios.get(`/profile/userPosts/${userId}`);
+            const response = await axios.get(`${vercelurl}/profile/userPosts/${userId}`);
             
 
             console.log("posts esponse");
@@ -108,7 +109,7 @@ const fetchSavedPosts = async () => {
         console.log(userId);
 
         if (userData) {
-            const response = await axios.get(`/profile/savedPosts/${userId}`);
+            const response = await axios.get(`${vercelurl}/profile/savedPosts/${userId}`);
             
             console.log("response");
             console.log(response);
@@ -131,7 +132,7 @@ const fetchSavedPosts = async () => {
         const userId=userData._id;
         console.log(userId);
 
-        const response = await axios.get(`/profile/likedPosts/${userId}`);
+        const response = await axios.get(`${vercelurl}/profile/likedPosts/${userId}`);
         console.log(response);
         setLikedPosts(response.data);
     } catch (error) {

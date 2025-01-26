@@ -15,14 +15,15 @@ const Register = () => {
 
     const navigate = useNavigate();
     const backendBaseUrl = 'http://localhost:7000';
-    const renderurl="https://socialmedia-backend-2njs.onrender.com";
+    // const vercelurl="https://socialmedia-backend-2njs.onrender.com";
+    const vercelurl="https://friendsbookweb.up.railway.app";
     const { setUser, connectSocket } = useSocket();
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await axios.post(`/user/check-email`, { email });
+            const { data } = await axios.post(`${vercelurl}/user/check-email`, { email });
             if (data.exists) {
                 toast.error('Email already exists!');
                 return;
@@ -41,7 +42,7 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post(`/user/validate-otp`, { email, otp });
+            await axios.post(`${vercelurl}/user/validate-otp`, { email, otp });
             toast.success('OTP validated successfully!');
             await handleRegister();
         } catch (error) {
@@ -54,7 +55,7 @@ const Register = () => {
     const handleRegister = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.post(`/user/register`, {
+            const { data } = await axios.post(`${vercelurl}/user/register`, {
                 username,
                 fullname,
                 email,
